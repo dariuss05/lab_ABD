@@ -3,7 +3,6 @@ Proiect ABD folosind container Docker.
 
 1) docker run -d --name abd_mongo_lab -e MONGO_INITDB_ROOT_USERNAME=mongoadmin -e MONGO_INITDB_ROOT_PASSWORD=darius -p 27017:27017 mongo:latest
 
-
 2) mongoimport --db=abd_proiect --collection=states --file=simplemaps/uszips.csv --type=csv --headerline  mongodb://mongoadmin:darius@localhost:27017/?authSource=admin
 
 3) mongosh mongodb://mongoadmin:darius@localhost:27017/?authSource=admin
@@ -11,7 +10,6 @@ Proiect ABD folosind container Docker.
 // CERINTA A: "Get the states with a total population of over 10 million."
 
 Am inceput prin a crea un index pentru deoarece am considerat ca este mai eficienta cautarea statelor. Prin faptul ca am creat un index pentru "state_name" si "population", inseamna ca se "realizeaza" o baza de date "temporara" unde sunt stocate doar coloanele respective.
-
 
 db.states.createIndex({state_name : 1})
 db.states.createIndex({population : 1})
@@ -31,7 +29,6 @@ db.states.aggregate([
 ])
 
 In $group, am grupat statele, unde am realizat suma populatiei in fiecare stat, ca mai apoi sa realizez un $match unde am verificat doar statele cu o populatie mai mare de 10 milioane.
-
 
 // CERINTA B: "Get the average city population by state."
 
@@ -74,7 +71,6 @@ Utilizand $group, am putut lua state_name si media populatiei folosind operatoru
 
 Iar ultimul stagiu, $project, l-am folosit pentru a putea avea rezultate "curate". In asa fel incat average_population sa nu fie numar cu virgula, utilizand operatorul $round cu precizie de 0.
 
-
 // CERINTA C: "Get the largest and the smallest city in each state."
 
 db.states.aggregate([
@@ -113,7 +109,6 @@ db.states.aggregate([
     }
   }
 ])
-
 
 // CERINTA D: "Get the largest and the smallest counties in each state."
 
