@@ -1,16 +1,12 @@
-
-
 // Ivasca Darius-Nicusor, master anul 1 TI, UPT
 Proiect ABD folosind container Docker. 
 
-// 1) Pornim container-ul docker creat, avand nume abd_mongo_lab, username=mongoadmin, password=darius, pe portul 27017, utilizand ultima versiune de mongo
-docker run -d --name abd_mongo_lab -e MONGO_INITDB_ROOT_USERNAME=mongoadmin -e MONGO_INITDB_ROOT_PASSWORD=darius -p 27017:27017 mongo:latest
+1) docker run -d --name abd_mongo_lab -e MONGO_INITDB_ROOT_USERNAME=mongoadmin -e MONGO_INITDB_ROOT_PASSWORD=darius -p 27017:27017 mongo:latest
 
-// 2) Importam .csv-ul folosind comanda mongoimport in db-ul abd_proiect, in colectia states, specificand tipul fisierului si faptul ca prima linie din fisierul .csv sunt titlurile coloanelor (prin utilizarea --headerline) => !!! comanda este folosita in afara environment-ului de docker !!!
-mongoimport --db=abd_proiect --collection=states --file=simplemaps/uszips.csv --type=csv --headerline  mongodb://mongoadmin:darius@localhost:27017/?authSource=admin
 
-// 3) Conectare la container-ul Docker:
-mongosh mongodb://mongoadmin:darius@localhost:27017/?authSource=admin
+2) mongoimport --db=abd_proiect --collection=states --file=simplemaps/uszips.csv --type=csv --headerline  mongodb://mongoadmin:darius@localhost:27017/?authSource=admin
+
+3) mongosh mongodb://mongoadmin:darius@localhost:27017/?authSource=admin
 
 // CERINTA A: "Get the states with a total population of over 10 million."
 
